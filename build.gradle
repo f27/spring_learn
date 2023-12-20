@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'guru.qa'
+
+java {
+    sourceCompatibility = '17'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        postgresDriverVersion = '42.6.0'
+        lombokVersion = '1.18.30'
+        oauth2AuthorizationServerVersion = '1.1.2'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,2 @@
+rootProject.name = 'bobr'
+include 'bobr-auth'
