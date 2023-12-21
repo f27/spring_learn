@@ -1,0 +1,23 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: bobr-api
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: 'http://127.0.0.1:9000'
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
+bobr-front:
+  base-uri: 'http://127.0.0.1:3000'

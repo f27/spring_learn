@@ -1,2 +1,4 @@
 rootProject.name = 'bobr'
 include 'bobr-auth'
+include 'bobr-gateway'
+

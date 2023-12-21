@@ -23,8 +23,7 @@ public class UserService {
     }
 
     @Transactional
-    public @Nonnull
-    String registerUser(@Nonnull String username, @Nonnull String password) {
+    public @Nonnull String registerUser(@Nonnull String username, @Nonnull String password) {
         UserEntity userEntity = new UserEntity();
         userEntity.setEnabled(true);
         userEntity.setAccountNonExpired(true);
