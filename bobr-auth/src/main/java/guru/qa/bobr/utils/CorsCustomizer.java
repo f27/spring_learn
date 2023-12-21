@@ -1,4 +1,4 @@
-package guru.qa.bobr.service.cors;
+package guru.qa.bobr.utils;
 
 import jakarta.annotation.Nonnull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +13,14 @@ import java.util.List;
 @Component
 public class CorsCustomizer {
 
-    private final String bobrFrontUri;
-    private final String bobrAuthUri;
+    private final String frontUri;
+    private final String authUri;
 
     @Autowired
-    public CorsCustomizer(@Value("${bobr-front.base-uri}") String bobrFrontUri,
-                          @Value("${bobr-auth.base-uri}") String bobrAuthUri) {
-        this.bobrFrontUri = bobrFrontUri;
-        this.bobrAuthUri = bobrAuthUri;
+    public CorsCustomizer(@Value("${bobr-front.base-uri}") String frontUri,
+                          @Value("${bobr-auth.base-uri}") String authUri) {
+        this.frontUri = frontUri;
+        this.authUri = authUri;
     }
 
     public void corsCustomizer(@Nonnull HttpSecurity http) throws Exception {
@@ -28,7 +28,7 @@ public class CorsCustomizer {
             CorsConfigurationSource source = s -> {
                 CorsConfiguration cc = new CorsConfiguration();
                 cc.setAllowCredentials(true);
-                cc.setAllowedOrigins(List.of(bobrFrontUri, bobrAuthUri));
+                cc.setAllowedOrigins(List.of(frontUri, authUri));
                 cc.setAllowedHeaders(List.of("*"));
                 cc.setAllowedMethods(List.of("*"));
                 return cc;

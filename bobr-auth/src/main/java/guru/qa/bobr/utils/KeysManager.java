@@ -1,4 +1,4 @@
-package guru.qa.bobr.config.keys;
+package guru.qa.bobr.utils;
 
 import com.nimbusds.jose.jwk.RSAKey;
 import jakarta.annotation.Nonnull;

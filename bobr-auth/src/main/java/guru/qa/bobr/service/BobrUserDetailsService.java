@@ -1,15 +1,15 @@
 package guru.qa.bobr.service;
 
-import guru.qa.bobr.data.UserEntity;
-import guru.qa.bobr.data.repository.UserRepository;
-import guru.qa.bobr.domain.BobrUserDetails;
+import guru.qa.bobr.domain.UserDomain;
+import guru.qa.bobr.entity.UserEntity;
+import guru.qa.bobr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class BobrUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -25,6 +25,6 @@ public class BobrUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new BobrUserDetails(user);
+        return new UserDomain(user);
     }
 }

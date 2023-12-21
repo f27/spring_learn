@@ -1,4 +1,4 @@
-package guru.qa.bobr.service.cors;
+package guru.qa.bobr.utils;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

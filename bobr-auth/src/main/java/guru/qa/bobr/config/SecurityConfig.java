@@ -1,7 +1,7 @@
 package guru.qa.bobr.config;
 
-import guru.qa.bobr.service.cors.CookieCsrfFilter;
-import guru.qa.bobr.service.cors.CorsCustomizer;
+import guru.qa.bobr.utils.CookieCsrfFilter;
+import guru.qa.bobr.utils.CorsCustomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 @Configuration
 public class SecurityConfig {
+
     private final CorsCustomizer corsCustomizer;
 
     @Autowired
@@ -27,7 +28,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         corsCustomizer.corsCustomizer(http);
-
         return http.authorizeHttpRequests(customizer -> customizer
                         .requestMatchers(
                                 antMatcher("/register"),

@@ -1,6 +1,6 @@
 package guru.qa.bobr.domain;
 
-import guru.qa.bobr.data.UserEntity;
+import guru.qa.bobr.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,11 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class BobrUserDetails implements UserDetails {
+public class UserDomain implements UserDetails {
 
     private final UserEntity user;
 
-    public BobrUserDetails(UserEntity user) {
+    public UserDomain(UserEntity user) {
         this.user = user;
     }
 
