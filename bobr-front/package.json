@@ -8,12 +8,10 @@
     "react-dom": "^18.2.0"
   },
   "scripts": {
-    "bui54456ld": "sh -ac '. ./.env.${REACT_APP_ENV}; webpack build'",
     "build:docker": "REACT_APP_ENV=docker webpack",
     "build:staging": "REACT_APP_ENV=staging webpack",
     "build:prod": "REACT_APP_ENV=prod webpack",
     "start:windows": "Set REACT_APP_ENV=dev&& webpack serve  --open",
-    "start:windows1": "Set REACT_APP_ENV=dev&& webpack serve  --watch",
     "start:dev": "REACT_APP_ENV=dev webpack serve --open"
   },
   "eslintConfig": {
