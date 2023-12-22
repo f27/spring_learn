@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
 
-    private final String frontUriRedirect;
+    private final String frontUri;
 
     public ErrorController(@Value("${bobr-front.base-uri}") String frontUri) {
-        this.frontUriRedirect = frontUri + "/redirect";
+        this.frontUri = frontUri;
     }
 
     @RequestMapping("/error")
     public String handleError() {
-        return "redirect:" + frontUriRedirect;
+        return "redirect:" + frontUri;
     }
 }
