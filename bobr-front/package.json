@@ -3,25 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "buffer": "^6.0.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^18.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "bui54456ld": "sh -ac '. ./.env.${REACT_APP_ENV}; webpack build'",
+    "build:docker": "REACT_APP_ENV=docker webpack",
+    "build:staging": "REACT_APP_ENV=staging webpack",
+    "build:prod": "REACT_APP_ENV=prod webpack",
+    "start:windows": "Set REACT_APP_ENV=dev&& webpack serve  --open",
+    "start:windows1": "Set REACT_APP_ENV=dev&& webpack serve  --watch",
+    "start:dev": "REACT_APP_ENV=dev webpack serve --open"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -37,8 +34,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "7.18.6",
+    "babel-loader": "^9.1.0",
+    "copy-webpack-plugin": "^11.0.0",
     "crypto-js": "^4.2.0",
-    "react-router": "^6.21.0",
-    "react-router-dom": "^6.21.0"
+    "css-loader": "^6.7.2",
+    "dotenv": "^16.0.3",
+    "react-router-dom": "^6.21.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }
