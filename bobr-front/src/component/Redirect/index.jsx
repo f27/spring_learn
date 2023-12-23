@@ -1,5 +1,6 @@
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect} from "react";
+import {Buffer} from "buffer";
 
 export const Redirect = () => {
     const [searchParams] = useSearchParams();
@@ -9,13 +10,15 @@ export const Redirect = () => {
     useEffect(() => {
         if (searchParams?.get('code')) {
             const code = searchParams?.get('code');
-
+            const client = 'client';
+            const secret = 'secret';
 
             const verifier = sessionStorage.getItem('codeVerifier');
             const initialUrl = `${process.env.REACT_APP_AUTH_URL}/oauth2/token?client_id=client&redirect_uri=${process.env.REACT_APP_FRONT_URL}/authorized&grant_type=authorization_code`;
             const url = `${initialUrl}&code=${code}&code_verifier=${verifier}`;
             const headers = new Headers();
             headers.append('Content-type', 'application/json');
+            headers.append('Authorization', `Basic ${Buffer.from(`${client}:${secret}`).toString('base64')}`);
 
             fetch(url, {
                 method: 'POST',
@@ -23,9 +26,10 @@ export const Redirect = () => {
                 headers
             }).then(async (response) => {
                 const token = await response.json();
-                if(token?.id_token && token?.access_token) {
+                if(token?.id_token && token?.access_token && token?.refresh_token) {
                     sessionStorage.setItem('id_token', token.id_token);
                     sessionStorage.setItem('access_token', token.access_token);
+                    sessionStorage.setItem('refresh_token', token.refresh_token);
                     sessionStorage.removeItem("codeChallenge");
                     sessionStorage.removeItem("codeVerifier");
                     navigate('/main');
