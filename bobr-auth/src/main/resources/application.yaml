@@ -1,11 +1,5 @@
 server:
   port: 9000
-  # ONLY FOR TESTING
-  servlet:
-    session:
-      cookie:
-        http-only: false
-        secure: false
 
 spring:
   application:

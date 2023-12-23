@@ -1,4 +1,5 @@
 rootProject.name = 'bobr'
 include 'bobr-auth'
 include 'bobr-gateway'
-
+include 'bobr-userdata'
+include 'bobr-grpc-common'

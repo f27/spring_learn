@@ -1,0 +1,13 @@
+grpc:
+  server:
+    port: 8081
+
+spring:
+  application:
+    name: bobr-userdata
+
+logging:
+  level:
+    root: INFO
+    org.springframework.kafka: DEBUG
+    org.springframework.web: INFO

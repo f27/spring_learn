@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
   error:
     include-message: always
 
@@ -21,3 +21,9 @@ logging:
 
 bobr-front:
   base-uri: 'http://127.0.0.1:3000'
+
+grpc:
+  client:
+    grpcUserDataClient:
+      address: 'static://localhost:8081'
+      negotiationType: PLAINTEXT

@@ -16,6 +16,7 @@ subprojects {
         postgresDriverVersion = '42.6.0'
         flywayVersion = '9.22.2'
         lombokVersion = '1.18.30'
+        springGrpcVersion = '2.15.0.RELEASE'
     }
 }
 
