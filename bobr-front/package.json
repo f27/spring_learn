@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build:docker": "REACT_APP_ENV=docker webpack",
+    "build:dev": "REACT_APP_ENV=dev webpack",
     "build:staging": "REACT_APP_ENV=staging webpack",
     "build:prod": "REACT_APP_ENV=prod webpack",
     "start:windows": "Set REACT_APP_ENV=dev&& webpack serve  --open",
