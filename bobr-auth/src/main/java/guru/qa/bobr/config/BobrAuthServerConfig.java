@@ -13,12 +13,15 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -27,12 +30,16 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Configuration
 public class BobrAuthServerConfig {
@@ -120,5 +127,18 @@ public class BobrAuthServerConfig {
     @Bean
     public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
         return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+    }
+
+    @Bean
+    OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer() {
+        return context -> {
+            if (context.getTokenType() == OAuth2TokenType.ACCESS_TOKEN) {
+                Authentication principal = context.getPrincipal();
+                Set<String> authorities = principal.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toSet());
+                context.getClaims().claim("role", authorities);
+            }
+        };
     }
 }
